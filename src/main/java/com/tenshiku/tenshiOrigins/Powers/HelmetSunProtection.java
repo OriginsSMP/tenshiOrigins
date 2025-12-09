@@ -38,7 +38,7 @@ public class HelmetSunProtection implements VisibleAbility, Listener {
 
     private boolean isInSunlight(Player player) {
         return player.getWorld().isDayTime() &&
-                player.getLocation().getBlock().getLightFromSky() >= 14;
+                player.getLocation().getBlock().getLightFromSky() == 15;
     }
 
     private boolean isNotInFire(Player player) {
@@ -55,7 +55,7 @@ public class HelmetSunProtection implements VisibleAbility, Listener {
         }
 
         runForAbility(player, p -> {
-            if (p.isOnline() && isWearingProtectiveHelmet(p) && isInSunlight(p) && isNotInFire(p)) {
+            if (isWearingProtectiveHelmet(p) && isInSunlight(p) && isNotInFire(p)) {
                 event.setCancelled(true);
                 p.setFireTicks(0);
             }
