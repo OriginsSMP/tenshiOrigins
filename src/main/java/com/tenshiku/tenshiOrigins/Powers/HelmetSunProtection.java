@@ -38,7 +38,8 @@ public class HelmetSunProtection implements VisibleAbility, Listener {
     }
 
     private boolean isInSunlight(Player player) {
-        return player.getWorld().getTime() <= 12550 &&
+        return player.getWorld().getTime() >= 23560 &&
+                player.getWorld().getTime() <= 12560 &&
                 player.getLocation().getBlock().getLightFromSky() >= 14;
     }
 
