@@ -2,6 +2,7 @@ package com.tenshiku.tenshiOrigins;
 
 import com.starshootercity.OriginsAddon;
 import com.starshootercity.abilities.types.Ability;
+import com.tenshiku.tenshiOrigins.Powers.DragonFireBall;
 import com.tenshiku.tenshiOrigins.Powers.HelmetSunProtection;
 import com.tenshiku.tenshiOrigins.Powers.DaylightWeakness;
 import com.tenshiku.tenshiOrigins.Powers.Carnivorous;
@@ -24,7 +25,8 @@ public final class TenshiOrigins extends OriginsAddon {
         return List.of(
                 helmetSunProtection,
                 daylightWeakness,
-                new Carnivorous()
+                new Carnivorous(),
+                new DragonFireBall()
         );
     }
 
@@ -35,6 +37,7 @@ public final class TenshiOrigins extends OriginsAddon {
         getLogger().info("  - tenshiorigins:helmet_sun_protection");
         getLogger().info("  - tenshiorigins:daylight_weakness");
         getLogger().info("  - tenshiorigins:carnivorous");
+        getLogger().info("  - tenshiorigins:dragon_fireball");
         getLogger().info("Add these powers to your vampire origin configuration.");
 
         daylightWeakness.startTask(this);

@@ -2,6 +2,7 @@ package com.tenshiku.tenshiOrigins.Powers;
 
 import com.starshootercity.abilities.types.VisibleAbility;
 import net.kyori.adventure.key.Key;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -37,8 +38,8 @@ public class HelmetSunProtection implements VisibleAbility, Listener {
     }
 
     private boolean isInSunlight(Player player) {
-        return player.getWorld().isDayTime() &&
-                player.getLocation().getBlock().getLightFromSky() == 15;
+        return player.getWorld().getTime() <= 12550 &&
+                player.getLocation().getBlock().getLightFromSky() >= 14;
     }
 
     private boolean isNotInFire(Player player) {
