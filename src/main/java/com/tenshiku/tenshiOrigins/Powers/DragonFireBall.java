@@ -69,27 +69,31 @@ public class DragonFireBall implements VisibleAbility, CooldownAbility, Listener
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerClick(PlayerInteractEvent event) {
         Player player = event.getPlayer();
-        if (event.getAction() != Action.LEFT_CLICK_AIR || !NEEDED_ITEMS.contains(event.getItem().getType())) return;
+        try {
+            if (event.getAction() != Action.LEFT_CLICK_AIR || !NEEDED_ITEMS.contains(event.getItem().getType())) return;
 
-        NamespacedKey dragonFireballKey = new NamespacedKey(new TenshiOrigins(), "dragonFireball");
-        runForAbility(player, p -> {
+            NamespacedKey dragonFireballKey = new NamespacedKey(new TenshiOrigins(), "dragonFireball");
+            runForAbility(player, p -> {
 
-            if (hasCooldown(p)) {
-                long remaining = getCooldown(p) / 20; // Convert ticks to seconds
-                p.sendActionBar(net.kyori.adventure.text.Component.text(
-                        "Fire Dash on cooldown: " + remaining + "s",
-                        net.kyori.adventure.text.format.NamedTextColor.RED
-                ));
-                return;
-            }
+                if (hasCooldown(p)) {
+                    long remaining = getCooldown(p) / 20; // Convert ticks to seconds
+                    p.sendActionBar(net.kyori.adventure.text.Component.text(
+                            "Fire Dash on cooldown: " + remaining + "s",
+                            net.kyori.adventure.text.format.NamedTextColor.RED
+                    ));
+                    return;
+                }
 
-            Vector dir = p.getEyeLocation().getDirection().normalize();
-            Location loc = p.getEyeLocation();
-            Entity fireball = loc.getWorld().spawnEntity(loc, dragon_fireball);
-            fireball.setVelocity(dir.multiply(1.5));
-            fireball.getPersistentDataContainer().set(dragonFireballKey, PersistentDataType.STRING, player.getUniqueId().toString());
-            setCooldown(p);
-        });
+                Vector dir = p.getEyeLocation().getDirection().normalize();
+                Location loc = p.getEyeLocation();
+                Entity fireball = loc.getWorld().spawnEntity(loc, dragon_fireball);
+                fireball.setVelocity(dir.multiply(1.5));
+                fireball.getPersistentDataContainer().set(dragonFireballKey, PersistentDataType.STRING, player.getUniqueId().toString());
+                setCooldown(p);
+            });
+        } catch (Exception e) {
+            //Player is not holding an item
+        }
     }
 
     @EventHandler
